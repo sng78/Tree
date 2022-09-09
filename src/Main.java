@@ -13,22 +13,21 @@ public class Main {
         person.add(new Person("Victor", "Victorov", 10));
 
         maxSymbols = 8;
-        Comparator<Person> comparator = Main::compare;
+        Comparator<Person> comparator = (Person o1, Person o2) -> {
+            if ((o1.surname.length() > maxSymbols) && (o2.surname.length() > maxSymbols)) {
+                return o1.age - o2.age;
+            } else {
+                if (o1.surname.length() > o2.surname.length()) {
+                    return 1;
+                } else if (o1.surname.length() < o2.surname.length()) {
+                    return -1;
+                } else {
+                    return o1.age - o2.age;
+                }
+            }
+        };
+
         person.sort(comparator);
         System.out.println(person);
-    }
-
-    public static int compare(Person o1, Person o2) {
-        if ((o1.surname.length() > maxSymbols) && (o2.surname.length() > maxSymbols)) {
-            return o1.age - o2.age;
-        } else {
-            if (o1.surname.length() > o2.surname.length()) {
-                return 1;
-            } else if (o1.surname.length() < o2.surname.length()) {
-                return -1;
-            } else {
-                return o1.age - o2.age;
-            }
-        }
     }
 }
